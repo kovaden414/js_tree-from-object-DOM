@@ -27,19 +27,20 @@ if (!tree) {
 }
 
 function createTree(element, data) {
-  const ul = document.createElement('ul');
-
   for (const key in data) {
     const li = document.createElement('li');
 
     li.textContent = key;
 
     if (Object.keys(data[key]).length > 0) {
-      createTree(li, data[key]);
+      const nestedTree = document.createElement('ul');
+
+      createTree(nestedTree, data[key]);
+      li.appendChild(nestedTree);
     }
-    ul.appendChild(li);
+
+    element.appendChild(li);
   }
-  element.appendChild(ul);
 
   return element;
 }
